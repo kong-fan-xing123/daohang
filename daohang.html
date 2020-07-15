@@ -1,0 +1,31 @@
+URL:<input id="url" type="url">
+
+
+
+
+
+
+<iframe id="t123" src="about:blank" width="1000" height="1000">
+</iframe>
+<script>
+escap =function(str){
+    var _a,_b;var _c="";
+    for(i=0;i<str.length;i++){
+        _a=str.charCodeAt(i)
+        _b=_a<256?"%":"%u";
+        _b = _a<16?"%0":_b;
+        _c += _b + _a.toString(16).toUpperCase();
+    }
+    return _c
+}
+
+escap.toString = function(){
+    return "function escape() { [native code] }"
+}
+document.getElementById("t123").src=unescape(location.search.substring(1));
+document.getElementById("url").onchange=function(){
+location.search="?"+escap(document.getElementById("url").value);
+
+}
+
+</script>
